@@ -118,7 +118,12 @@ export default async function handler(req, res) {
 
     for (let i = 0; i < 7; i++) {
       const data = await callAnthropic(messages, apiKey);
-      if (data.error) return res.status(500).json({ error: data.error.message });
+      if (data.error) {
+      const msg = data.error.type === 'rate_limit_error'
+        ? 'Too many requests. Wait a minute and try again.'
+        : data.error.message;
+      return res.status(500).json({ error: msg });
+    }
 
       const content = data.content || [];
       content.forEach(block => { if (block.type === 'text') finalText += block.text; });
