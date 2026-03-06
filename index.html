@@ -68,7 +68,7 @@
       background: linear-gradient(135deg, var(--orange), var(--gold));
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .logo span { color: var(--orange); }
+    .logo span { color: var(--orange); margin-left: -2px; }
     .nav-links { display: flex; align-items: center; gap: 1.5rem; }
     .nav-link { font-size: 0.85rem; color: var(--dim); transition: color 0.2s; }
     .nav-link:hover { color: var(--text); }
@@ -84,48 +84,55 @@
     /* HERO */
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
+      display: flex; align-items: center;
       padding: 9rem 2rem 6rem;
       position: relative;
+      overflow: hidden;
     }
     .hero::after {
       content: '';
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 900px; height: 700px;
-      background: radial-gradient(ellipse at center top, rgba(255,107,53,0.07) 0%, transparent 65%);
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(255,107,53,0.07) 0%, transparent 60%);
       pointer-events: none;
     }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-left {}
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--gold);
       background: var(--gold-dim); border: 1px solid rgba(247,201,72,0.2);
       padding: 0.35rem 0.9rem; border-radius: 100px;
-      margin-bottom: 2rem; position: relative; z-index: 1;
+      margin-bottom: 2rem;
       animation: fadeUp 0.6s ease both;
     }
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-size: clamp(3rem, 5vw, 5rem);
       line-height: 1.05; font-weight: 400;
       letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
-      position: relative; z-index: 1;
       animation: fadeUp 0.6s ease 0.1s both;
     }
     .hero h1 em { font-style: italic; color: var(--orange); }
     .hero-sub {
-      font-size: 1.15rem; color: var(--mid);
-      max-width: 520px; font-weight: 300; line-height: 1.7;
+      font-size: 1.1rem; color: var(--mid);
+      font-weight: 300; line-height: 1.7;
       margin-bottom: 2.5rem;
-      position: relative; z-index: 1;
       animation: fadeUp 0.6s ease 0.2s both;
     }
     .hero-form {
       display: flex; gap: 10px;
-      position: relative; z-index: 1;
       animation: fadeUp 0.6s ease 0.3s both;
     }
     .hero-form input {
@@ -133,7 +140,7 @@
       padding: 0.85rem 1.4rem; border-radius: 100px;
       border: 1px solid var(--border);
       background: var(--card); color: var(--text);
-      width: 280px; outline: none;
+      width: 240px; outline: none;
       transition: border-color 0.25s;
     }
     .hero-form input:focus { border-color: var(--orange); }
@@ -148,15 +155,69 @@
     .btn-primary:hover { background: #e85a28; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,107,53,0.25); }
     .hero-note {
       margin-top: 0.9rem; font-size: 0.77rem; color: var(--dim);
-      position: relative; z-index: 1;
       animation: fadeUp 0.6s ease 0.4s both;
     }
     .hero-success {
       display: none; align-items: center; gap: 8px;
       color: var(--teal); font-size: 0.95rem; font-weight: 500;
-      margin-top: 1rem; position: relative; z-index: 1;
+      margin-top: 1rem;
     }
     .hero-success.show { display: flex; animation: fadeUp 0.4s ease both; }
+
+    /* PRODUCT MOCKUP */
+    .hero-right {
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+    .mockup-window {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,107,53,0.06);
+      transform: perspective(1000px) rotateY(-3deg) rotateX(1deg);
+    }
+    .mockup-bar {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .mockup-dots { display: flex; gap: 6px; }
+    .mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .mockup-title { font-size: 11px; color: var(--dim); font-family: var(--sans); }
+    .mockup-body { padding: 20px; }
+    .mockup-input-row {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+    .mockup-input {
+      flex: 1; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 12px;
+      font-size: 11px; color: var(--dim); font-family: var(--sans);
+    }
+    .mockup-btn {
+      height: 36px; padding: 0 16px; border-radius: 8px;
+      background: var(--orange); font-size: 11px; font-weight: 600;
+      color: #fff; font-family: var(--sans); white-space: nowrap;
+      display: flex; align-items: center;
+    }
+    .mockup-section { margin-bottom: 14px; }
+    .mockup-section-head {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+    }
+    .mockup-dot-sq { width: 6px; height: 20px; border-radius: 2px; flex-shrink: 0; }
+    .mockup-section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--sans); }
+    .mockup-card {
+      border-radius: 8px; padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-top-width: 2px;
+      margin-bottom: 6px;
+    }
+    .mockup-card-title { height: 7px; border-radius: 3px; margin-bottom: 6px; }
+    .mockup-card-lines { display: flex; flex-direction: column; gap: 3px; }
+    .mockup-card-line { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.05); }
+    .mockup-pill-row { display: flex; gap: 5px; margin-top: 7px; }
+    .mockup-pill { height: 14px; border-radius: 7px; background: rgba(10,102,194,0.15); border: 1px solid rgba(10,102,194,0.2); }
 
     /* STATS BAR */
     .stats-bar {
@@ -394,6 +455,11 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-right { display: none; }
+      .hero h1 { font-size: clamp(2.8rem, 10vw, 4rem); }
+    }
     @media (max-width: 768px) {
       .brief-grid, .who-grid, .steps { grid-template-columns: 1fr; }
       .steps::before { display: none; }
@@ -415,8 +481,7 @@
     <div class="logo-mark">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a0a0f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
     </div>
-    feedmatch<span>.ai</span>
-  </a>
+    <span class="logo-name">feedmatch<span class="logo-dot">.ai</span></span></a>
   <div class="nav-links">
     <a href="manifesto.html" class="nav-link">Manifesto</a>
     <a href="#access" class="nav-btn">Get access</a>
@@ -425,20 +490,103 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-eyebrow">
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-    Early access open
-  </div>
-  <h1>Think before<br/>you <em>post.</em></h1>
-  <p class="hero-sub">Feedmatch prepares you for the LinkedIn conversation. Know what to say before you open the app.</p>
-  <form class="hero-form" id="heroForm">
-    <input type="email" name="email" placeholder="your@email.com" required/>
-    <button type="submit" class="btn-primary">Get instant access</button>
-  </form>
-  <p class="hero-note">No credit card. No LinkedIn login. Enter email and you're in immediately.</p>
-  <div class="hero-success" id="heroSuccess">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-    Taking you to the app...
+  <div class="hero-inner">
+    <!-- LEFT: text + form -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Early access open
+      </div>
+      <h1>Think before<br/>you <em>post.</em></h1>
+      <p class="hero-sub">Feedmatch prepares you for the LinkedIn conversation. Know what to say before you open the app.</p>
+      <form class="hero-form" id="heroForm">
+        <input type="email" name="email" placeholder="your@email.com" required/>
+        <button type="submit" class="btn-primary">Get instant access</button>
+      </form>
+      <p class="hero-note">No credit card. No LinkedIn login. Enter email and you're in immediately.</p>
+      <div class="hero-success" id="heroSuccess">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Taking you to the app...
+      </div>
+    </div>
+
+    <!-- RIGHT: product mockup -->
+    <div class="hero-right">
+      <div class="mockup-window">
+        <div class="mockup-bar">
+          <div class="mockup-dots">
+            <div class="mockup-dot" style="background:#ff5f56;"></div>
+            <div class="mockup-dot" style="background:#ffbd2e;"></div>
+            <div class="mockup-dot" style="background:#27c93f;"></div>
+          </div>
+          <div class="mockup-title">feedmatch.ai — Your Preparation Brief</div>
+          <div style="width:42px;"></div>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-input-row">
+            <div class="mockup-input">Brand Design for Startups</div>
+            <div class="mockup-btn">Prepare</div>
+          </div>
+
+          <!-- Trending Topics -->
+          <div class="mockup-section">
+            <div class="mockup-section-head">
+              <div class="mockup-dot-sq" style="background:#ff6b35;"></div>
+              <div class="mockup-section-label" style="color:#ff6b35;">Trending Topics</div>
+            </div>
+            <div class="mockup-card" style="border-top-color:#ff6b35; background:rgba(255,107,53,0.04);">
+              <div class="mockup-card-title" style="background:rgba(255,107,53,0.25); width:75%;"></div>
+              <div class="mockup-card-lines">
+                <div class="mockup-card-line" style="width:95%;"></div>
+                <div class="mockup-card-line" style="width:80%;"></div>
+              </div>
+              <div class="mockup-pill-row">
+                <div class="mockup-pill" style="width:80px;"></div>
+                <div class="mockup-pill" style="width:64px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key People -->
+          <div class="mockup-section">
+            <div class="mockup-section-head">
+              <div class="mockup-dot-sq" style="background:#f7c948;"></div>
+              <div class="mockup-section-label" style="color:#f7c948;">Key People</div>
+            </div>
+            <div class="mockup-card" style="border-top-color:#f7c948; background:rgba(247,201,72,0.04);">
+              <div class="mockup-card-title" style="background:rgba(247,201,72,0.25); width:60%;"></div>
+              <div class="mockup-card-lines">
+                <div class="mockup-card-line" style="width:90%;"></div>
+                <div class="mockup-card-line" style="width:70%;"></div>
+              </div>
+              <div class="mockup-pill-row">
+                <div class="mockup-pill" style="width:72px;"></div>
+                <div class="mockup-pill" style="width:56px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Articles -->
+          <div class="mockup-section" style="margin-bottom:0;">
+            <div class="mockup-section-head">
+              <div class="mockup-dot-sq" style="background:#4ecdc4;"></div>
+              <div class="mockup-section-label" style="color:#4ecdc4;">Articles</div>
+            </div>
+            <div class="mockup-card" style="border-top-color:#4ecdc4; background:rgba(78,205,196,0.04);">
+              <div class="mockup-card-title" style="background:rgba(78,205,196,0.25); width:68%;"></div>
+              <div class="mockup-card-lines">
+                <div class="mockup-card-line" style="width:88%;"></div>
+                <div class="mockup-card-line" style="width:55%;"></div>
+              </div>
+              <div class="mockup-pill-row">
+                <div class="mockup-pill" style="width:76px;"></div>
+                <div class="mockup-pill" style="width:60px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -655,7 +803,7 @@
 </section>
 
 <footer>
-  <span>2025 Feedmatch.ai</span>
+  <span>2026 Feedmatch.ai</span>
   <a href="manifesto.html">Manifesto</a>
   <a href="app.html">App</a>
   <span style="color: #3a3a4a">preparation tool, not a bot</span>
