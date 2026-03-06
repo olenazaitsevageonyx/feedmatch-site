@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedmatch.ai — Say less. Mean more.</title>
+  <meta name="description" content="A manifesto about conscious communication on LinkedIn. Why automation is killing professional conversation, and what it means to actually show up."/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f; --card: #111118; --bdr: #1e1e2a;
+      --txt: #e8e8ed; --mid: #b0b0be; --dim: #6a6a7a;
+      --or: #ff6b35; --gd: #f7c948; --tl: #4ecdc4; --vt: #a78bfa;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Outfit', system-ui, sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans); background: var(--bg);
+      color: var(--txt); line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(10,10,15,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .logo { font-family: var(--serif); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+    .logo-mark { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--or), var(--gd)); display: flex; align-items: center; justify-content: center; }
+    .logo span { color: var(--or); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-link { font-size: 0.82rem; color: var(--dim); transition: color 0.2s; }
+    .nav-link:hover { color: var(--txt); }
+    .nav-btn {
+      font-size: 0.82rem; font-weight: 600;
+      padding: 0.45rem 1.1rem; border-radius: 100px;
+      border: 1px solid rgba(255,107,53,0.4);
+      color: var(--or); cursor: pointer; transition: all 0.25s;
+      background: transparent;
+    }
+    .nav-btn:hover { background: var(--or); color: var(--bg); border-color: var(--or); }
+
+    /* HERO */
+    .hero {
+      padding: 8rem 2rem 3.5rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse at top, rgba(255,107,53,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .issue-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--or); margin-bottom: 1.75rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .issue-label::before, .issue-label::after {
+      content: ''; height: 1px; width: 40px; background: var(--or); opacity: 0.4;
+    }
+    .hero-title {
+      font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero-title em { font-style: italic; color: var(--or); }
+
+
+    /* RULE */
+    .rule { height: 1px; background: linear-gradient(to right, transparent, var(--bdr), transparent); margin: 0; }
+
+    /* BODY */
+    .body { max-width: 680px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+
+    /* SECTION */
+    .m-section { margin-bottom: 4rem; animation: fadeUp 0.7s ease both; }
+
+    .m-section h2 {
+      font-family: var(--serif); font-size: 1.75rem;
+      font-weight: 400; line-height: 1.25;
+      margin-bottom: 1.25rem; color: var(--txt);
+    }
+    .m-section p {
+      font-size: 1rem; color: var(--mid); font-weight: 300;
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+    .m-section p:last-child { margin-bottom: 0; }
+    .m-section strong { color: var(--txt); font-weight: 600; }
+
+    /* PULL QUOTE */
+    .pull-quote {
+      border-left: 3px solid var(--or); padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2.5rem 0;
+    }
+    .pull-quote p {
+      font-family: var(--serif); font-size: 1.35rem; font-style: italic;
+      color: var(--txt); line-height: 1.5; font-weight: 400; margin: 0;
+    }
+
+    /* COMPARISON TABLE */
+    .comparison {
+      margin: 2.5rem 0; border: 1px solid var(--bdr);
+      border-radius: 12px; overflow: hidden;
+    }
+    .comparison-header {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      background: var(--card); padding: 10px 16px;
+      border-bottom: 1px solid var(--bdr);
+    }
+    .comparison-row {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      padding: 10px 16px; border-bottom: 1px solid var(--bdr);
+    }
+    .comparison-row:last-child { border-bottom: none; }
+    .comparison-row:nth-child(even) { background: rgba(255,255,255,0.015); }
+    .col-head { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); }
+    .col-head.feedmatch { color: var(--or); }
+    .col-cell { font-size: 0.83rem; color: var(--dim); }
+    .col-cell.feedmatch { color: var(--txt); font-weight: 500; }
+    .col-cell.bad { color: rgba(239,68,68,0.6); }
+    .col-cell.ok { color: rgba(247,201,72,0.7); }
+
+    /* RESULTS CARD */
+    .results-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--or);
+      border-radius: 12px; padding: 2rem; margin: 2.5rem 0;
+    }
+    .results-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--or); margin-bottom: 1rem; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 1.25rem; }
+    .result-num { font-family: var(--serif); font-size: 1.75rem; color: var(--or); line-height: 1; }
+    .result-label { font-size: 0.75rem; color: var(--dim); margin-top: 3px; line-height: 1.4; }
+    .results-note { font-size: 0.83rem; color: var(--dim); font-style: italic; }
+
+    /* PRINCIPLE BLOCK */
+    .principles { margin: 2.5rem 0; display: flex; flex-direction: column; gap: 1px; }
+    .principle {
+      padding: 1.25rem 1.5rem; background: var(--card);
+      border: 1px solid var(--bdr); border-radius: 0;
+    }
+    .principle:first-child { border-radius: 10px 10px 0 0; }
+    .principle:last-child { border-radius: 0 0 10px 10px; }
+    .principle-num { font-family: var(--serif); font-size: 0.9rem; color: var(--or); margin-bottom: 4px; }
+    .principle p { font-size: 0.88rem; color: var(--mid); margin: 0; font-weight: 300; line-height: 1.65; }
+    .principle strong { color: var(--txt); }
+
+    /* CTA */
+    .manifesto-cta {
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px solid var(--bdr);
+      position: relative;
+    }
+    .manifesto-cta::before {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .manifesto-cta h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 0.75rem; position: relative; z-index: 1; }
+    .manifesto-cta p { font-size: 0.9rem; color: var(--dim); margin-bottom: 1.75rem; max-width: 380px; margin-left: auto; margin-right: auto; line-height: 1.65; position: relative; z-index: 1; }
+    .cta-btn {
+      font-family: var(--sans); font-size: 0.95rem; font-weight: 600;
+      padding: 0.85rem 2rem; border-radius: 100px; border: none;
+      background: var(--or); color: #fff; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      transition: all 0.25s; position: relative; z-index: 1;
+    }
+    .cta-btn:hover { background: #e85a28; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,107,53,0.25); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--bdr); padding: 1.75rem 2rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; flex-wrap: wrap;
+      color: var(--dim); font-size: 0.78rem;
+    }
+    footer a { color: var(--dim); transition: color 0.2s; }
+    footer a:hover { color: var(--txt); }
+
+    /* ANIM */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      .comparison-header, .comparison-row { grid-template-columns: 1.5fr 1fr 1fr; }
+      .comparison-header .col-head:last-child, .comparison-row .col-cell:last-child { display: none; }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 0.85rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0a0a0f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    feedmatch<span>.ai</span>
+  </a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="app.html" class="nav-btn">Get access</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="issue-label">Manifesto</div>
+  <h1 class="hero-title">Say less.<br/><em>Mean more.</em></h1>
+</div>
+
+<div class="rule"></div>
+
+<div class="body">
+
+  <div class="m-section reveal">
+    <h2>LinkedIn is filling up with voices without thoughts.</h2>
+    <p>Not because people have nothing to say. But because a new behavior pattern has emerged: open ChatGPT, paste a post, get a comment, publish. Repeat 20 times. Call it a "presence strategy."</p>
+    <p>The result is a feed where everyone sounds the same. Where a comment under a layoff post and a comment under a product launch are written in identical tones. Where <strong>"Great insight! Fully agree, this is so important for the industry"</strong> has become the new spam.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <p>Presence on LinkedIn is not measured by the number of comments. It is measured by whether people remember you after you wrote something.</p>
+  </div>
+
+  <div class="m-section reveal">
+    <h2>We built the wrong mental model for what LinkedIn is.</h2>
+    <p>LinkedIn is not a publishing platform. It is a professional conversation space. Conversations have a rule that posts do not: speak only when you have something to contribute.</p>
+    <p>We have spent years optimizing for activity. We should have been optimizing for <strong>quality of thought.</strong></p>
+  </div>
+
+  <div class="m-section reveal">
+    <h2>The 7-day experiment that changed how I think about this.</h2>
+    <p>I tested intentional LinkedIn presence on myself. Same frequency. Completely different approach. Instead of opening the app and scrolling for what to react to, I prepared first.</p>
+
+    <div class="results-card">
+      <div class="results-label">Results: 7 days</div>
+      <div class="results-grid">
+        <div>
+          <div class="result-num">40-50%</div>
+          <div class="result-label">growth in profile and post impressions</div>
+        </div>
+        <div>
+          <div class="result-num">5-10</div>
+          <div class="result-label">early access requests with zero advertising</div>
+        </div>
+        <div>
+          <div class="result-num">0</div>
+          <div class="result-label">GPT-generated comments used</div>
+        </div>
+      </div>
+      <div class="results-note">Likes from designers and creative directors I had been following for years. Real signal, not noise.</div>
+    </div>
+
+    <p>I did not post more. I posted with more precision. That came from preparation: knowing what was being discussed and whether I had anything worth adding.</p>
+  </div>
+
+  <div class="m-section reveal">
+    <h2>What conscious communication actually means.</h2>
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-num">01</div>
+        <p><strong>Think before you open the app.</strong> Form your point of view while you're still away from the feed. Once you're in the scroll, you're reacting. Before the scroll, you're thinking.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">02</div>
+        <p><strong>Only speak when you have something to say.</strong> Silence is underrated. Skipping a conversation you have nothing to contribute to is not disengagement. It is respect for the space.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">03</div>
+        <p><strong>Use AI for context, not for words.</strong> AI is excellent at mapping what is being discussed right now. It is bad at knowing what you, specifically, think about it. Use it for the former. Do the latter yourself.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">04</div>
+        <p><strong>Your reputation is built one comment at a time.</strong> Every comment is a signal about how you think, not just what you think.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-section reveal">
+    <h2>How this compares to what everyone else is selling.</h2>
+    <div class="comparison">
+      <div class="comparison-header">
+        <div class="col-head"></div>
+        <div class="col-head">Automation tools</div>
+        <div class="col-head">GPT comments</div>
+        <div class="col-head feedmatch">Feedmatch</div>
+      </div>
+      <div class="comparison-row">
+        <div class="col-cell" style="color:var(--mid);">What it generates</div>
+        <div class="col-cell bad">Content</div>
+        <div class="col-cell ok">Content</div>
+        <div class="col-cell feedmatch">Context</div>
+      </div>
+      <div class="comparison-row">
+        <div class="col-cell" style="color:var(--mid);">Who speaks</div>
+        <div class="col-cell bad">The tool</div>
+        <div class="col-cell ok">The tool</div>
+        <div class="col-cell feedmatch">You</div>
+      </div>
+      <div class="comparison-row">
+        <div class="col-cell" style="color:var(--mid);">Account risk</div>
+        <div class="col-cell bad">High</div>
+        <div class="col-cell ok">Medium</div>
+        <div class="col-cell feedmatch">Zero</div>
+      </div>
+      <div class="comparison-row">
+        <div class="col-cell" style="color:var(--mid);">Result</div>
+        <div class="col-cell bad">Noise</div>
+        <div class="col-cell bad">Noise</div>
+        <div class="col-cell feedmatch">Reputation</div>
+      </div>
+      <div class="comparison-row">
+        <div class="col-cell" style="color:var(--mid);">Philosophy</div>
+        <div class="col-cell bad">More is better</div>
+        <div class="col-cell ok">Faster is better</div>
+        <div class="col-cell feedmatch">Precise is better</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-section reveal">
+    <h2>What Feedmatch is and is not.</h2>
+    <p>Feedmatch is a preparation space. You use it before you open LinkedIn. It maps what is being discussed in your niche right now: trending topics, key people, important articles, cross-platform insights. Then it gives you LinkedIn search links to find live conversations.</p>
+    <p>It does not write your comments, post for you, or connect to your account. Only you know what you think.</p>
+
+    <div class="pull-quote">
+      <p>The tool prepares you for the conversation. You show up and say it yourself.</p>
+    </div>
+
+    <p>AI can generate an endless stream of words. That means the value of a word is falling. The value of <em>your</em> word, with your name under it, is rising. <strong>Conscious communication is a competitive advantage.</strong></p>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="manifesto-cta reveal">
+  <h2>Ready to prepare?</h2>
+  <p>Enter your email for instant access to your first Preparation Brief. No LinkedIn login. No waiting list.</p>
+  <a href="app.html" class="cta-btn">Get instant access</a>
+</div>
+
+<footer>
+  <span>2025 Feedmatch.ai</span>
+  <a href="index.html">Home</a>
+  <a href="app.html">App</a>
+  <span style="color:#2a2a3a">preparation tool, not a bot</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

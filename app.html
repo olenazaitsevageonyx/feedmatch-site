@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedmatch.ai — Your Preparation Brief</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f; --card: #111118; --bdr: #1e1e2a;
+      --txt: #e8e8ed; --mid: #b0b0be; --dim: #6a6a7a;
+      --or: #ff6b35; --gd: #f7c948; --tl: #4ecdc4; --vt: #a78bfa;
+      --or-bg: rgba(255,107,53,0.08); --gd-bg: rgba(247,201,72,0.08);
+      --tl-bg: rgba(78,205,196,0.08); --vt-bg: rgba(167,139,250,0.08);
+      --grn: #4ade80; --grn-bg: rgba(74,222,128,0.1); --grn-bdr: rgba(74,222,128,0.25);
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Outfit', system-ui, sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--txt); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    /* EMAIL GATE */
+    .gate {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,10,15,0.97);
+      backdrop-filter: blur(20px);
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    .gate.show { display: flex; }
+    .gate-card {
+      width: 100%; max-width: 420px; text-align: center;
+      background: var(--card); border: 1px solid var(--bdr);
+      border-radius: 16px; padding: 3rem 2.5rem;
+    }
+    .gate-logo { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .gate-logo-mark { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--or), var(--gd)); display: flex; align-items: center; justify-content: center; }
+    .gate-logo span { color: var(--or); }
+    .gate-card h2 { font-family: var(--serif); font-size: 1.75rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .gate-card p { font-size: 0.9rem; color: var(--dim); margin-bottom: 1.75rem; line-height: 1.6; }
+    .gate-input {
+      width: 100%; font-family: var(--sans); font-size: 0.95rem;
+      padding: 0.85rem 1.2rem; border-radius: 10px;
+      border: 1px solid var(--bdr); background: var(--bg);
+      color: var(--txt); outline: none; margin-bottom: 0.75rem;
+      transition: border-color 0.25s;
+    }
+    .gate-input:focus { border-color: var(--or); }
+    .gate-input::placeholder { color: var(--dim); }
+    .gate-btn {
+      width: 100%; font-family: var(--sans); font-size: 0.95rem; font-weight: 600;
+      padding: 0.85rem; border-radius: 10px; border: none;
+      background: linear-gradient(135deg, var(--or), var(--gd));
+      color: #0a0a0f; cursor: pointer; transition: opacity 0.2s;
+    }
+    .gate-btn:hover { opacity: 0.9; }
+    .gate-note { font-size: 0.76rem; color: var(--dim); margin-top: 0.75rem; }
+
+    /* NAV */
+    nav {
+      padding: 14px 24px; border-bottom: 1px solid var(--bdr);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--txt); }
+    .nav-logo-mark { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--or), var(--gd)); display: flex; align-items: center; justify-content: center; }
+    .nav-logo span { color: var(--or); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-link { font-size: 0.82rem; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover { color: var(--txt); }
+    .nav-email { font-size: 0.75rem; color: var(--dim); background: var(--card); border: 1px solid var(--bdr); padding: 3px 10px; border-radius: 6px; }
+
+    /* MAIN */
+    .main { max-width: 680px; margin: 0 auto; padding: 36px 20px 60px; }
+
+    /* INPUT SECTION */
+    .input-wrap { margin-bottom: 36px; }
+    .input-wrap h1 { font-family: var(--serif); font-size: 1.75rem; font-weight: 400; margin-bottom: 6px; }
+    .input-wrap p { font-size: 0.88rem; color: var(--dim); margin-bottom: 1.5rem; line-height: 1.6; }
+    .input-row { display: flex; gap: 10px; }
+    .niche-input {
+      flex: 1; font-family: var(--sans); font-size: 0.95rem;
+      padding: 12px 16px; border-radius: 10px;
+      border: 1px solid var(--bdr); background: var(--card);
+      color: var(--txt); outline: none; transition: border-color 0.25s;
+    }
+    .niche-input:focus { border-color: var(--or); }
+    .niche-input::placeholder { color: var(--dim); }
+    .gen-btn {
+      padding: 12px 22px; border-radius: 10px; border: none;
+      font-family: var(--sans); font-size: 0.9rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--or), var(--gd));
+      color: #0a0a0f; cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .gen-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+    .gen-btn:disabled { background: var(--bdr); color: var(--dim); cursor: not-allowed; transform: none; }
+    .suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .suggestion-btn {
+      font-family: var(--sans); font-size: 0.8rem; padding: 4px 12px;
+      border-radius: 20px; background: transparent;
+      border: 1px solid var(--bdr); color: var(--dim); cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .suggestion-btn:hover { border-color: var(--or); color: var(--or); }
+
+    /* LOADING */
+    .loading { text-align: center; padding: 60px 20px; display: none; }
+    .spinner {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 3px solid var(--bdr); border-top-color: var(--or);
+      margin: 0 auto 20px;
+      animation: spin 0.9s linear infinite;
+    }
+    .loading-status { font-size: 0.88rem; color: var(--txt); margin-bottom: 6px; }
+    .loading-note { font-size: 0.78rem; color: var(--dim); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ERROR */
+    .error {
+      display: none; padding: 14px 16px; border-radius: 10px;
+      background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+      color: #f87171; font-size: 0.85rem; margin-bottom: 20px;
+    }
+
+    /* RESULTS */
+    .results { display: none; }
+
+    /* META BAR */
+    .meta-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px; border-radius: 8px;
+      background: var(--card); border: 1px solid var(--bdr);
+      margin-bottom: 24px; flex-wrap: wrap; gap: 8px;
+    }
+    .meta-info { font-size: 0.82rem; color: var(--dim); }
+    .meta-niche { color: var(--or); font-weight: 600; }
+    .meta-saved { margin-left: 8px; padding: 2px 8px; border-radius: 4px; background: rgba(78,205,196,0.1); color: var(--tl); font-size: 0.72rem; font-weight: 500; }
+    .meta-actions { display: flex; gap: 8px; }
+    .meta-btn {
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+      padding: 5px 12px; border-radius: 6px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .meta-btn-primary { background: linear-gradient(135deg, var(--or), var(--gd)); border: none; color: #0a0a0f; }
+    .meta-btn-secondary { background: transparent; border: 1px solid var(--bdr); color: var(--dim); }
+    .meta-btn-secondary:hover { border-color: var(--or); color: var(--or); }
+
+    /* SECTION */
+    .brief-section { margin-bottom: 32px; }
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+    .section-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; }
+    .section-tag-badge { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 7px; border-radius: 4px; }
+    .section-desc { font-size: 0.8rem; color: var(--dim); margin-bottom: 12px; margin-left: 40px; line-height: 1.5; }
+    .cards { display: flex; flex-direction: column; gap: 10px; }
+
+    /* CARD */
+    .brief-card {
+      padding: 14px 16px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--bdr);
+      border-top-width: 3px;
+      transition: opacity 0.3s;
+    }
+    .brief-card.skipped { opacity: 0.45; }
+    .card-top { display: flex; align-items: flex-start; gap: 10px; }
+    .card-body { flex: 1; }
+    .card-title { font-size: 0.9rem; font-weight: 600; color: var(--txt); margin-bottom: 4px; }
+    .card-title.skipped-text { text-decoration: line-through; color: var(--dim); }
+    .card-summary { font-size: 0.8rem; color: var(--dim); line-height: 1.6; }
+    .card-action {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 8px; font-size: 0.72rem; color: var(--dim); opacity: 0.7;
+    }
+    .card-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .li-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 20px;
+      background: rgba(10,102,194,0.12); border: 1px solid rgba(10,102,194,0.25);
+      color: #5B9BD5; font-size: 0.72rem; text-decoration: none;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .li-pill:hover { background: rgba(10,102,194,0.2); }
+    .card-angle {
+      margin-top: 10px; padding: 10px 12px; border-radius: 8px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--bdr);
+      display: none;
+    }
+    .card-angle.open { display: block; }
+    .angle-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .angle-item {
+      font-size: 0.82rem; color: var(--txt); line-height: 1.6;
+      padding-left: 10px; margin-bottom: 5px;
+    }
+    .angle-item:last-child { margin-bottom: 0; }
+
+    /* CARD BUTTONS */
+    .card-btns { display: flex; gap: 6px; margin-top: 10px; }
+    .card-btn {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 500;
+      padding: 4px 10px; border-radius: 6px; cursor: pointer;
+      border: 1px solid var(--bdr); background: transparent;
+      color: var(--dim); transition: all 0.2s;
+    }
+    .card-btn:hover { border-color: currentColor; }
+    .card-btn.angle-toggle { }
+    .card-btn.skip-btn { }
+    .card-btn.unskip-btn { border-color: var(--dim); }
+
+    /* EMPTY */
+    .empty {
+      text-align: center; padding: 20px 60px 60px; color: var(--dim);
+    }
+    .empty-icon { opacity: 0.1; margin-bottom: 14px; display: flex; justify-content: center; }
+    .empty h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--txt); margin-bottom: 8px; }
+    .empty p { font-size: 0.85rem; line-height: 1.65; max-width: 380px; margin: 0 auto; }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75); z-index: 500;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      width: 100%; max-width: 540px; max-height: 80vh;
+      background: var(--card); border: 1px solid var(--bdr);
+      border-radius: 12px; display: flex; flex-direction: column; overflow: hidden;
+    }
+    .modal-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 18px; border-bottom: 1px solid var(--bdr);
+    }
+    .modal-title { font-size: 0.9rem; font-weight: 600; }
+    .modal-actions { display: flex; gap: 8px; }
+    .modal-copy-btn {
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+      padding: 5px 14px; border-radius: 6px;
+      background: linear-gradient(135deg, var(--or), var(--gd));
+      border: none; color: #0a0a0f; cursor: pointer;
+    }
+    .modal-close-btn {
+      font-family: var(--sans); font-size: 0.78rem;
+      padding: 5px 10px; border-radius: 6px;
+      background: transparent; border: 1px solid var(--bdr);
+      color: var(--dim); cursor: pointer;
+    }
+    .modal-body {
+      flex: 1; overflow: auto; padding: 18px;
+      font-size: 0.8rem; color: var(--dim); line-height: 1.75;
+      white-space: pre-wrap; word-break: break-word;
+      font-family: var(--sans);
+    }
+
+    @media (max-width: 600px) {
+      .input-row { flex-direction: column; }
+      nav { padding: 10px 16px; }
+      .main { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- EMAIL GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">
+      <div class="gate-logo-mark">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a0a0f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      feedmatch<span>.ai</span>
+    </div>
+    <h2>Think before you post.</h2>
+    <p>Enter your email for instant access to your Preparation Brief. No LinkedIn login. No waiting list.</p>
+    <input type="email" class="gate-input" id="gateEmail" placeholder="your@email.com"/>
+    <button class="gate-btn" id="gateBtn" onclick="unlockApp()">Get instant access</button>
+    <p class="gate-note">Free during beta. Unsubscribe any time.</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0a0a0f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    feedmatch<span>.ai</span>
+  </a>
+  <div class="nav-right">
+    <a href="manifesto.html" class="nav-link">Manifesto</a>
+    <span class="nav-email" id="navEmail"></span>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- INPUT -->
+  <div class="input-wrap">
+    <h1>Your Preparation Brief</h1>
+    <p>Enter your niche. Get 8 real conversations to think about before you open LinkedIn.</p>
+    <div class="input-row">
+      <input type="text" class="niche-input" id="nicheInput" placeholder="e.g. Brand design for tech startups" />
+      <button class="gen-btn" id="genBtn" onclick="generate()">Prepare</button>
+    </div>
+    <div class="suggestions">
+      <button class="suggestion-btn" onclick="setSuggestion('Brand Design')">Brand Design</button>
+      <button class="suggestion-btn" onclick="setSuggestion('SaaS Founders')">SaaS Founders</button>
+      <button class="suggestion-btn" onclick="setSuggestion('Freelance Consulting')">Freelance Consulting</button>
+      <button class="suggestion-btn" onclick="setSuggestion('AI Product Design')">AI Product Design</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div class="loading-status" id="loadingStatus">Connecting...</div>
+    <div class="loading-note">Usually 15-40 seconds</div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error" id="errorBox"></div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results"></div>
+
+  <!-- EMPTY -->
+  <div class="empty" id="empty">
+    <div class="empty-icon">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+    </div>
+    <h3>What do you want to talk about today?</h3>
+    <p>Enter your niche above. Feedmatch will find the real conversations happening right now so you can decide what's worth saying.</p>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Export Brief</span>
+      <div class="modal-actions">
+        <button class="modal-copy-btn" onclick="copyExport()">Copy all</button>
+        <button class="modal-close-btn" onclick="closeModal('exportModal')">Close</button>
+      </div>
+    </div>
+    <div class="modal-body" id="exportBody"></div>
+  </div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="modal-overlay" id="shareModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Share as LinkedIn post</span>
+      <div class="modal-actions">
+        <button class="modal-copy-btn" onclick="copyShare()">Copy</button>
+        <button class="modal-close-btn" onclick="closeModal('shareModal')">Close</button>
+      </div>
+    </div>
+    <div class="modal-body" id="shareBody"></div>
+  </div>
+</div>
+
+<script>
+const SECS = [
+  {
+    key: "trends", label: "Trending Topics", color: "#ff6b35", bg: "rgba(255,107,53,0.08)",
+    icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
+    desc: "What your niche is actually discussing right now. Find where you have a genuine perspective.",
+    action: "Read the context, then find the conversation on LinkedIn"
+  },
+  {
+    key: "people", label: "Key People", color: "#f7c948", bg: "rgba(247,201,72,0.08)",
+    icon: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+    desc: "Who is driving the conversation. Engage only if you have something real to add.",
+    action: "Find their latest post, comment only if you have a genuine reaction"
+  },
+  {
+    key: "articles", label: "Articles & Newsletters", color: "#4ecdc4", bg: "rgba(78,205,196,0.08)",
+    icon: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5V5a2 2 0 0 1 2-2h14v14H6.5c-1.4 0-2.5 1.1-2.5 2.5z",
+    desc: "Long-form content worth reading before you comment. React to the piece itself, not the headline.",
+    action: "Read the article first, then find where it's being discussed"
+  },
+  {
+    key: "voices", label: "Cross-Platform Voices", color: "#a78bfa", bg: "rgba(167,139,250,0.08)",
+    icon: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+    desc: "Insights from X, podcasts, Substack that haven't reached LinkedIn yet. Bring something new.",
+    action: "Reference the insight in a comment or post to start a fresh conversation"
+  }
+];
+
+const SYS = `You are Feedmatch.ai, a preparation tool for conscious professional communication on LinkedIn.
+Your goal is to help the user THINK before they open LinkedIn, not to generate content for them.
+Use web search to find REAL current discussions from the PAST 7 DAYS.
+
+RESPOND ONLY WITH VALID JSON. No markdown. No HTML tags. No citation tags of any kind.
+
+Structure:
+{
+  "trends": [{ "title": "...", "summary": "2-3 sentences plain text", "angles": ["genuine perspective 1", "genuine perspective 2"], "searchQueries": ["topic keyword query"] }],
+  "people": [same structure],
+  "articles": [same structure],
+  "voices": [same structure]
+}
+
+CRITICAL RULES:
+- Exactly 2 items per section (not more, not less)
+- "angles" = 2 genuine talking points that help the user find THEIR OWN perspective (not generic templates). 10-20 words each.
+- "searchQueries" = 1-2 LinkedIn content search queries using ONLY topic keywords, never person names
+- For "people" section: searchQueries must be TOPIC keywords only, NEVER include the person's name
+- ALL text must be plain text. NO citation tags. NO HTML. NO markdown. This is critical.
+- Real names, real topics, real current discussions. No emoji.
+
+REMINDER: Your entire response must be a single valid JSON object. Nothing before or after it.`;
+
+// State
+let brief = null;
+let briefNiche = '';
+let briefTime = null;
+let elapsed = 0;
+let timer = null;
+let skipped = {};
+let angleOpen = {};
+
+// Gate
+window.addEventListener('DOMContentLoaded', () => {
+  const email = localStorage.getItem('feedmatch_email');
+  if (!email) {
+    document.getElementById('gate').classList.add('show');
+  } else {
+    document.getElementById('navEmail').textContent = email;
+  }
+});
+
+async function unlockApp() {
+  const email = document.getElementById('gateEmail').value.trim();
+  if (!email.includes('@') || !email.includes('.')) {
+    document.getElementById('gateEmail').focus();
+    return;
+  }
+  const btn = document.getElementById('gateBtn');
+  btn.textContent = 'Opening...'; btn.disabled = true;
+  localStorage.setItem('feedmatch_email', email);
+  fetch('https://formspree.io/f/mlgwvnok', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ email })
+  }).catch(() => {});
+  document.getElementById('navEmail').textContent = email;
+  document.getElementById('gate').classList.remove('show');
+}
+
+document.getElementById('gateEmail').addEventListener('keydown', e => {
+  if (e.key === 'Enter') unlockApp();
+});
+
+// Helpers
+function setSuggestion(v) {
+  document.getElementById('nicheInput').value = v;
+  document.getElementById('nicheInput').focus();
+}
+
+function stripTags(t) {
+  if (!t) return t;
+  return t.replace(/<\/?[^>]+(>|$)/g, '').replace(/\[.*?\]/g, '').trim();
+}
+
+function cleanBrief(data) {
+  ['trends','people','articles','voices'].forEach(k => {
+    if (Array.isArray(data[k])) {
+      data[k] = data[k].slice(0, 2).map(item => ({
+        ...item,
+        title: stripTags(item.title || ''),
+        summary: stripTags(item.summary || ''),
+        angles: (item.angles || []).map(a => stripTags(a)),
+        searchQueries: (item.searchQueries || []).map(q => stripTags(q))
+      }));
+    } else {
+      data[k] = [];
+    }
+  });
+  return data;
+}
+
+async function multiTurn(prompt, onStatus) {
+  // Calls our Vercel serverless function - API key never touches the browser
+  onStatus('Searching the web...');
+  const email = localStorage.getItem('feedmatch_email') || 'unknown';
+  const r = await fetch('/api/brief', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ niche: prompt, email })
+  });
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || 'Something went wrong. Try again.');
+  if (data.searches > 0) onStatus(`Done (${data.searches} searches).`);
+  return data.text;
+}
+
+async function generate() {
+  const niche = document.getElementById('nicheInput').value.trim();
+  if (!niche) { document.getElementById('nicheInput').focus(); return; }
+
+  // Reset
+  brief = null; skipped = {}; angleOpen = {};
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('empty').style.display = 'none';
+  document.getElementById('errorBox').style.display = 'none';
+  document.getElementById('errorBox').textContent = '';
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('loadingStatus').textContent = 'Connecting...';
+
+  const btn = document.getElementById('genBtn');
+  btn.disabled = true;
+  elapsed = 0;
+  clearInterval(timer);
+  timer = setInterval(() => { elapsed++; btn.textContent = elapsed + 's'; }, 1000);
+
+  try {
+    const raw = await multiTurn(niche, s => document.getElementById('loadingStatus').textContent = s);
+    const m = raw.replace(/```json|```/g, '').trim().match(/\{[\s\S]*\}/);
+    if (!m) throw new Error('Could not parse response. Try again.');
+    const parsed = cleanBrief(JSON.parse(m[0]));
+    brief = parsed;
+    briefNiche = niche;
+    briefTime = new Date();
+    renderBrief();
+  } catch (e) {
+    document.getElementById('errorBox').textContent = e.message;
+    document.getElementById('errorBox').style.display = 'block';
+    document.getElementById('empty').style.display = 'block';
+  }
+
+  clearInterval(timer);
+  btn.textContent = 'Prepare';
+  btn.disabled = false;
+  document.getElementById('loading').style.display = 'none';
+}
+
+function renderBrief() {
+  const container = document.getElementById('results');
+  container.innerHTML = '';
+
+  // Meta bar
+  const meta = document.createElement('div');
+  meta.className = 'meta-bar';
+  meta.innerHTML = `
+    <div class="meta-info">
+      <span class="meta-niche">${briefNiche}</span>
+      <span style="margin-left:6px;color:var(--dim)">
+        ${briefTime ? briefTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''}
+        &nbsp;·&nbsp;${elapsed}s
+      </span>
+      <span class="meta-saved">~20 min saved</span>
+    </div>
+    <div class="meta-actions">
+      <button class="meta-btn meta-btn-primary" onclick="openShare()">Share as post</button>
+      <button class="meta-btn meta-btn-secondary" onclick="openExport()">Export</button>
+    </div>
+  `;
+  container.appendChild(meta);
+
+  // Sections
+  SECS.forEach(sec => {
+    const items = brief[sec.key];
+    if (!items || !items.length) return;
+    const secEl = document.createElement('div');
+    secEl.className = 'brief-section';
+    secEl.innerHTML = `
+      <div class="section-header">
+        <div class="section-icon" style="background:${sec.bg}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${sec.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${sec.icon}"/></svg>
+        </div>
+        <span class="section-title" style="color:${sec.color}">${sec.label}</span>
+        ${sec.key === 'voices' ? `<span class="section-tag-badge" style="color:${sec.color};background:${sec.bg}">Only on Feedmatch</span>` : ''}
+      </div>
+      <div class="section-desc">${sec.desc}</div>
+      <div class="cards" id="cards-${sec.key}"></div>
+    `;
+    container.appendChild(secEl);
+
+    const cardsEl = secEl.querySelector(`#cards-${sec.key}`);
+    items.forEach((item, idx) => {
+      const cardId = `${sec.key}-${idx}`;
+      const card = document.createElement('div');
+      card.className = 'brief-card';
+      card.id = `card-${cardId}`;
+      card.style.borderTopColor = sec.color;
+
+      const hasAngles = item.angles && item.angles.length > 0;
+      const pills = (item.searchQueries || []).map(q =>
+        `<a class="li-pill" href="https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent(q)}&datePosted=%22past-24h%22&sortBy=%22date_posted%22" target="_blank" rel="noopener noreferrer">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="#5B9BD5"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.3zM5.3 7.4a2.1 2.1 0 1 1 0-4.1 2.1 2.1 0 0 1 0 4.1zm1.8 13H3.6V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5C0 23.2.8 24 1.8 24h20.5c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg>
+          ${q}
+        </a>`
+      ).join('');
+
+      const angleItems = hasAngles ? item.angles.map(a =>
+        `<div class="angle-item" style="border-left:2px solid ${sec.color}33; padding-left:10px;">${a}</div>`
+      ).join('') : '';
+
+      card.innerHTML = `
+        <div class="card-top">
+          <div class="card-body">
+            <div class="card-title" id="title-${cardId}">${item.title}</div>
+            <div class="card-summary">${item.summary}</div>
+            <div class="card-action">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              ${sec.action}
+            </div>
+            ${pills ? `<div class="card-pills">${pills}</div>` : ''}
+            ${hasAngles ? `
+              <div class="card-angle" id="angle-${cardId}">
+                <div class="angle-label" style="color:${sec.color}">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="${sec.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  Your perspective
+                </div>
+                ${angleItems}
+              </div>
+            ` : ''}
+            <div class="card-btns">
+              ${hasAngles ? `<button class="card-btn angle-toggle" id="anglebtn-${cardId}" onclick="toggleAngle('${cardId}')" style="color:${sec.color};border-color:${sec.color}33">My perspective</button>` : ''}
+              <button class="card-btn skip-btn" id="skipbtn-${cardId}" onclick="toggleSkip('${cardId}')" style="color:var(--dim)">Skip this topic</button>
+            </div>
+          </div>
+        </div>
+      `;
+      cardsEl.appendChild(card);
+    });
+  });
+
+  container.style.display = 'block';
+}
+
+function toggleAngle(cardId) {
+  angleOpen[cardId] = !angleOpen[cardId];
+  const el = document.getElementById(`angle-${cardId}`);
+  const btn = document.getElementById(`anglebtn-${cardId}`);
+  if (el) el.classList.toggle('open', angleOpen[cardId]);
+  if (btn) btn.textContent = angleOpen[cardId] ? 'Hide' : 'My perspective';
+}
+
+function toggleSkip(cardId) {
+  skipped[cardId] = !skipped[cardId];
+  const card = document.getElementById(`card-${cardId}`);
+  const title = document.getElementById(`title-${cardId}`);
+  const btn = document.getElementById(`skipbtn-${cardId}`);
+  if (card) card.classList.toggle('skipped', skipped[cardId]);
+  if (title) title.classList.toggle('skipped-text', skipped[cardId]);
+  if (btn) btn.textContent = skipped[cardId] ? 'Unskip' : 'Skip this topic';
+}
+
+// Export
+function buildExport() {
+  if (!brief) return '';
+  let o = 'FEEDMATCH.AI PREPARATION BRIEF\n';
+  o += `Niche: ${briefNiche}\n`;
+  o += `Date: ${briefTime ? briefTime.toLocaleString() : ''}\n\n`;
+  o += '='.repeat(40) + '\n\n';
+  SECS.forEach(s => {
+    const items = brief[s.key];
+    if (!items?.length) return;
+    o += s.label.toUpperCase() + '\n' + '-'.repeat(s.label.length) + '\n\n';
+    items.forEach((x, i) => {
+      const id = `${s.key}-${i}`;
+      const status = skipped[id] ? ' [SKIPPED]' : '';
+      o += `${i + 1}. ${x.title}${status}\n   ${x.summary}\n`;
+      if (x.angles?.length) {
+        o += '\n   Your perspective:\n';
+        x.angles.forEach(a => { o += `   - ${a}\n`; });
+      }
+      if (x.searchQueries?.length) {
+        o += `\n   LinkedIn search: ${x.searchQueries.join(' | ')}\n`;
+      }
+      o += '\n';
+    });
+  });
+  o += '='.repeat(40) + '\n';
+  o += 'feedmatch.ai - preparation tool, not a bot\n';
+  return o;
+}
+
+function buildShare() {
+  if (!brief) return '';
+  const topics = (brief.trends || []).map(t => t.title).filter(Boolean).join(', ');
+  const people = (brief.people || []).map(p => p.title.split(' - ')[0]).filter(Boolean).join(', ');
+  let post = `I just ran my Preparation Brief for "${briefNiche}".\n\n`;
+  post += `Instead of opening LinkedIn and scrolling for 30 minutes, I spent 10 minutes preparing:\n\n`;
+  post += `What is being discussed right now: ${topics}\n`;
+  post += `Who to potentially engage with: ${people}\n\n`;
+  post += `The difference: I went in knowing what I wanted to say. Not looking for something to react to.\n\n`;
+  post += `No GPT comments. No generic reactions. Just showing up with an actual point of view.\n\n`;
+  post += `Testing this for 7 days. Will share results.\n\n`;
+  post += `feedmatch.ai`;
+  return post;
+}
+
+function openExport() {
+  document.getElementById('exportBody').textContent = buildExport();
+  document.getElementById('exportModal').classList.add('show');
+}
+function openShare() {
+  document.getElementById('shareBody').textContent = buildShare();
+  document.getElementById('shareModal').classList.add('show');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('show');
+}
+function copyExport() {
+  navigator.clipboard.writeText(buildExport()).then(() => {
+    const btn = document.querySelector('#exportModal .modal-copy-btn');
+    btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy all', 2000);
+  });
+}
+function copyShare() {
+  navigator.clipboard.writeText(buildShare()).then(() => {
+    const btn = document.querySelector('#shareModal .modal-copy-btn');
+    btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('show'); });
+});
+
+// Enter key on input
+document.getElementById('nicheInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') generate();
+});
+</script>
+</body>
+</html>

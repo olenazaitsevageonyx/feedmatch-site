@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feedmatch.ai — Your LinkedIn Engagement Brief</title>
-  <meta name="description" content="Get a personalized engagement brief: trending topics, key people, must-read articles, and ready-to-post comments — all mapped to your niche." />
-  <meta property="og:title" content="Feedmatch.ai — Your LinkedIn Engagement Brief" />
-  <meta property="og:description" content="Stop scrolling. Start engaging strategically. A daily brief that maps your LinkedIn landscape." />
-  <meta property="og:image" content="/og-image.png" />
-  <meta property="og:url" content="https://feedmatch.ai" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="canonical" href="https://feedmatch.ai" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedmatch.ai — Think before you post.</title>
+  <meta name="description" content="Feedmatch prepares you for the LinkedIn conversation. Know what to say before you open the app."/>
+  <meta property="og:title" content="Feedmatch.ai — Think before you post."/>
+  <meta property="og:description" content="Feedmatch prepares you for the conversation. You show up and say it yourself."/>
+  <meta property="og:image" content="/og-image.png"/>
+  <meta property="og:url" content="https://feedmatch.ai"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="canonical" href="https://feedmatch.ai"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --orange: #ff6b35;
-      --orange-dim: rgba(255, 107, 53, 0.15);
+      --orange-dim: rgba(255,107,53,0.12);
       --gold: #f7c948;
-      --gold-dim: rgba(247, 201, 72, 0.15);
+      --gold-dim: rgba(247,201,72,0.12);
+      --teal: #4ecdc4;
+      --violet: #a78bfa;
       --dark: #0a0a0f;
-      --dark-card: #111118;
-      --dark-card-hover: #16161f;
-      --dark-border: #1e1e2a;
+      --card: #111118;
+      --card-hover: #16161f;
+      --border: #1e1e2a;
       --text: #e8e8ed;
-      --text-mid: #b0b0be;
-      --text-dim: #6a6a7a;
+      --mid: #b0b0be;
+      --dim: #6a6a7a;
       --serif: 'Instrument Serif', Georgia, serif;
       --sans: 'Outfit', system-ui, sans-serif;
-      --radius: 16px;
-      --radius-sm: 10px;
+      --r: 14px;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--sans);
       background: var(--dark);
@@ -46,965 +44,663 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-
-    /* grain */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
     }
-
     a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* ═══════ NAV ═══════ */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(10,10,15,0.82);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--dark-border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
+    .logo { font-family: var(--serif); font-size: 1.35rem; display: flex; align-items: center; gap: 8px; }
+    .logo-mark {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--gold));
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .logo span { color: var(--orange); }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-link { font-size: 0.85rem; color: var(--dim); transition: color 0.2s; }
+    .nav-link:hover { color: var(--text); }
+    .nav-btn {
+      font-size: 0.85rem; font-weight: 600;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      border: 1px solid rgba(255,107,53,0.4);
+      color: var(--orange); background: transparent; cursor: pointer;
+      transition: all 0.25s;
+    }
+    .nav-btn:hover { background: var(--orange); color: var(--dark); border-color: var(--orange); }
 
-    .logo {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .logo-dot {
-      width: 7px; height: 7px;
-      background: var(--orange);
-      border-radius: 50%;
-    }
-
-    .nav-cta {
-      font-family: var(--sans);
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 0.55rem 1.4rem;
-      border-radius: 100px;
-      border: 1px solid rgba(255,107,53,0.5);
-      color: var(--orange);
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .nav-cta:hover {
-      background: var(--orange);
-      color: var(--dark);
-      border-color: var(--orange);
-    }
-
-    /* ═══════ HERO ═══════ */
+    /* HERO */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 5rem;
+      padding: 9rem 2rem 6rem;
       position: relative;
     }
-
     .hero::after {
       content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 800px; height: 800px;
-      background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 700px;
+      background: radial-gradient(ellipse at center top, rgba(255,107,53,0.07) 0%, transparent 65%);
       pointer-events: none;
     }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--gold);
-      background: var(--gold-dim);
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(247,201,72,0.2);
-      position: relative;
-      z-index: 1;
-      animation: fadeInDown 0.6s ease;
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gold);
+      background: var(--gold-dim); border: 1px solid rgba(247,201,72,0.2);
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      margin-bottom: 2rem; position: relative; z-index: 1;
+      animation: fadeUp 0.6s ease both;
     }
-
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
-      line-height: 1.1;
-      font-weight: 400;
-      max-width: 780px;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 1.05; font-weight: 400;
+      letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 1;
-      animation: fadeInDown 0.6s ease 0.1s both;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s ease 0.1s both;
     }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--orange);
-    }
-
+    .hero h1 em { font-style: italic; color: var(--orange); }
     .hero-sub {
-      font-size: 1.15rem;
-      color: var(--text-mid);
-      max-width: 560px;
+      font-size: 1.15rem; color: var(--mid);
+      max-width: 520px; font-weight: 300; line-height: 1.7;
       margin-bottom: 2.5rem;
-      font-weight: 300;
-      position: relative;
-      z-index: 1;
-      animation: fadeInDown 0.6s ease 0.2s both;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s ease 0.2s both;
     }
-
     .hero-form {
-      display: flex;
-      gap: 0.75rem;
-      position: relative;
-      z-index: 1;
-      animation: fadeInDown 0.6s ease 0.3s both;
+      display: flex; gap: 10px;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s ease 0.3s both;
     }
-
-    .hero-form input[type="email"] {
-      font-family: var(--sans);
-      font-size: 0.95rem;
-      padding: 0.85rem 1.4rem;
-      border-radius: 100px;
-      border: 1px solid var(--dark-border);
-      background: var(--dark-card);
-      color: var(--text);
-      width: 300px;
-      outline: none;
-      transition: border-color 0.3s;
+    .hero-form input {
+      font-family: var(--sans); font-size: 0.95rem;
+      padding: 0.85rem 1.4rem; border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--card); color: var(--text);
+      width: 280px; outline: none;
+      transition: border-color 0.25s;
     }
-    .hero-form input[type="email"]:focus {
-      border-color: var(--orange);
-    }
-    .hero-form input[type="email"]::placeholder {
-      color: var(--text-dim);
-    }
-
+    .hero-form input:focus { border-color: var(--orange); }
+    .hero-form input::placeholder { color: var(--dim); }
     .btn-primary {
-      font-family: var(--sans);
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 0.85rem 2rem;
-      border-radius: 100px;
-      border: none;
-      background: var(--orange);
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s;
-      white-space: nowrap;
+      font-family: var(--sans); font-size: 0.95rem; font-weight: 600;
+      padding: 0.85rem 1.75rem; border-radius: 100px;
+      border: none; background: var(--orange);
+      color: #fff; cursor: pointer; white-space: nowrap;
+      transition: all 0.25s;
     }
-    .btn-primary:hover {
-      background: #e85a28;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 30px rgba(255,107,53,0.25);
-    }
-
+    .btn-primary:hover { background: #e85a28; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,107,53,0.25); }
     .hero-note {
-      margin-top: 1rem;
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      position: relative;
-      z-index: 1;
-      animation: fadeInDown 0.6s ease 0.4s both;
+      margin-top: 0.9rem; font-size: 0.77rem; color: var(--dim);
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s ease 0.4s both;
     }
-
-    /* ═══════ PROBLEM ═══════ */
-    .problem {
-      padding: 6rem 0;
-      border-top: 1px solid var(--dark-border);
+    .hero-success {
+      display: none; align-items: center; gap: 8px;
+      color: var(--teal); font-size: 0.95rem; font-weight: 500;
+      margin-top: 1rem; position: relative; z-index: 1;
     }
+    .hero-success.show { display: flex; animation: fadeUp 0.4s ease both; }
 
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--orange);
-      margin-bottom: 1.5rem;
+    /* STATS BAR */
+    .stats-bar {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-
-    .section-label svg {
-      width: 16px; height: 16px;
-      stroke: var(--orange);
+    .stats-inner {
+      display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
     }
+    .stat { text-align: center; }
+    .stat-num { font-family: var(--serif); font-size: 2.2rem; color: var(--orange); line-height: 1; }
+    .stat-label { font-size: 0.8rem; color: var(--dim); margin-top: 4px; }
 
-    .problem h2 {
+    /* SECTIONS */
+    section { padding: 6rem 0; border-top: 1px solid var(--border); }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--orange);
+      margin-bottom: 1.25rem;
+    }
+    .section-tag svg { stroke: var(--orange); flex-shrink: 0; }
+    h2.section-title {
       font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.2;
-      max-width: 700px;
-      margin-bottom: 2rem;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 0.9rem;
+    }
+    .section-sub {
+      color: var(--mid); font-size: 1rem;
+      font-weight: 300; max-width: 580px; line-height: 1.7;
     }
 
-    .problem-text {
-      color: var(--text-mid);
-      font-size: 1.05rem;
-      max-width: 620px;
-      font-weight: 300;
+    /* PROBLEM */
+    .problem-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem; margin-top: 3rem;
     }
-
-    .pain-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-top: 3rem;
+    .problem-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.75rem;
+      transition: border-color 0.25s, transform 0.25s;
     }
-
-    .pain-card {
-      background: var(--dark-card);
-      border: 1px solid var(--dark-border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .pain-card:hover {
-      border-color: rgba(255,107,53,0.3);
-      transform: translateY(-2px);
-    }
-
-    .pain-icon {
-      width: 40px; height: 40px;
-      border-radius: var(--radius-sm);
+    .problem-card:hover { border-color: rgba(255,107,53,0.25); transform: translateY(-2px); }
+    .problem-icon {
+      width: 38px; height: 38px; border-radius: 10px;
       background: var(--orange-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin-bottom: 1rem;
     }
-    .pain-icon svg {
-      width: 20px; height: 20px;
-      stroke: var(--orange);
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+    .problem-icon svg { stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .problem-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .problem-card p { font-size: 0.88rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
 
-    .pain-card h3 {
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+    /* EXPERIMENT */
+    .experiment-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: var(--r); padding: 2.5rem;
+      margin-top: 2.5rem; max-width: 680px;
     }
-    .pain-card p {
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      font-weight: 300;
-      line-height: 1.55;
+    .experiment-label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--orange); margin-bottom: 1rem;
     }
+    .experiment-quote {
+      font-family: var(--serif); font-size: 1.3rem; font-style: italic;
+      color: var(--text); line-height: 1.5; margin-bottom: 1.5rem;
+    }
+    .experiment-results {
+      display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .exp-stat { }
+    .exp-num { font-family: var(--serif); font-size: 1.8rem; color: var(--orange); line-height: 1; }
+    .exp-label { font-size: 0.78rem; color: var(--dim); margin-top: 2px; }
+    .experiment-author {
+      font-size: 0.83rem; color: var(--dim);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .author-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
 
-    /* ═══════ HOW IT WORKS — BRIEF ═══════ */
-    .brief {
-      padding: 6rem 0;
-      border-top: 1px solid var(--dark-border);
-    }
-
-    .brief h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .brief-sub {
-      color: var(--text-mid);
-      font-size: 1.05rem;
-      max-width: 600px;
-      font-weight: 300;
-      margin-bottom: 3.5rem;
-    }
-
+    /* BRIEF CARDS */
     .brief-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem; margin-top: 3rem;
     }
-
     .brief-card {
-      background: var(--dark-card);
-      border: 1px solid var(--dark-border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.75rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
     }
-    .brief-card:hover {
-      transform: translateY(-2px);
-    }
-
     .brief-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     }
-
-    .brief-card[data-color="orange"]::before { background: var(--orange); }
-    .brief-card[data-color="orange"]:hover { border-color: rgba(255,107,53,0.3); }
-    .brief-card[data-color="gold"]::before { background: var(--gold); }
-    .brief-card[data-color="gold"]:hover { border-color: rgba(247,201,72,0.3); }
-    .brief-card[data-color="teal"]::before { background: #4ecdc4; }
-    .brief-card[data-color="teal"]:hover { border-color: rgba(78,205,196,0.3); }
-    .brief-card[data-color="violet"]::before { background: #a78bfa; }
-    .brief-card[data-color="violet"]:hover { border-color: rgba(167,139,250,0.3); }
-
-    .brief-num {
-      font-family: var(--serif);
-      font-size: 2.5rem;
-      line-height: 1;
-      margin-bottom: 0.75rem;
-    }
-    .brief-card[data-color="orange"] .brief-num { color: var(--orange); }
-    .brief-card[data-color="gold"] .brief-num { color: var(--gold); }
-    .brief-card[data-color="teal"] .brief-num { color: #4ecdc4; }
-    .brief-card[data-color="violet"] .brief-num { color: #a78bfa; }
-
-    .brief-card h3 {
-      font-family: var(--sans);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-
-    .brief-card p {
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      font-weight: 300;
-      line-height: 1.55;
-    }
-
+    .brief-card:hover { transform: translateY(-2px); }
+    .brief-card[data-c="or"]::before { background: var(--orange); }
+    .brief-card[data-c="or"]:hover { border-color: rgba(255,107,53,0.3); }
+    .brief-card[data-c="gd"]::before { background: var(--gold); }
+    .brief-card[data-c="gd"]:hover { border-color: rgba(247,201,72,0.3); }
+    .brief-card[data-c="tl"]::before { background: var(--teal); }
+    .brief-card[data-c="tl"]:hover { border-color: rgba(78,205,196,0.3); }
+    .brief-card[data-c="vt"]::before { background: var(--violet); }
+    .brief-card[data-c="vt"]:hover { border-color: rgba(167,139,250,0.3); }
+    .brief-num { font-family: var(--serif); font-size: 2rem; line-height: 1; margin-bottom: 0.75rem; }
+    .brief-card[data-c="or"] .brief-num { color: var(--orange); }
+    .brief-card[data-c="gd"] .brief-num { color: var(--gold); }
+    .brief-card[data-c="tl"] .brief-num { color: var(--teal); }
+    .brief-card[data-c="vt"] .brief-num { color: var(--violet); }
+    .brief-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .brief-card p { font-size: 0.88rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
     .brief-tag {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 0.3rem 0.75rem;
-      border-radius: 100px;
-      background: rgba(255,255,255,0.05);
-      color: var(--text-mid);
-      border: 1px solid var(--dark-border);
+      display: inline-block; margin-top: 1rem;
+      font-size: 0.73rem; font-weight: 500;
+      padding: 0.28rem 0.7rem; border-radius: 100px;
+      background: rgba(255,255,255,0.05); color: var(--mid);
+      border: 1px solid var(--border);
     }
 
-    /* ═══════ WORKFLOW ═══════ */
-    .workflow {
-      padding: 6rem 0;
-      border-top: 1px solid var(--dark-border);
-    }
-
-    .workflow h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 3rem;
-    }
-
+    /* HOW */
     .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      position: relative;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem; margin-top: 3rem; position: relative;
     }
-
-    .step {
-      text-align: center;
-      position: relative;
-    }
-
-    .step-circle {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: var(--dark-card);
-      border: 2px solid var(--dark-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.25rem;
-      transition: border-color 0.3s;
-    }
-    .step:hover .step-circle {
-      border-color: var(--orange);
-    }
-
-    .step-circle svg {
-      width: 24px; height: 24px;
-      stroke: var(--orange);
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .step h3 {
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-    .step p {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-      font-weight: 300;
-      max-width: 260px;
-      margin: 0 auto;
-    }
-
-    /* connector line */
     .steps::before {
-      content: '';
-      position: absolute;
-      top: 32px;
-      left: calc(16.66% + 40px);
-      right: calc(16.66% + 40px);
+      content: ''; position: absolute; top: 28px;
+      left: calc(16.66% + 36px); right: calc(16.66% + 36px);
       height: 1px;
-      background: linear-gradient(to right, var(--dark-border), rgba(255,107,53,0.3), var(--dark-border));
+      background: linear-gradient(to right, var(--border), rgba(255,107,53,0.25), var(--border));
     }
-
-    /* ═══════ WHO ═══════ */
-    .who {
-      padding: 6rem 0;
-      border-top: 1px solid var(--dark-border);
+    .step { text-align: center; }
+    .step-circle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--card); border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+      transition: border-color 0.25s;
     }
+    .step:hover .step-circle { border-color: var(--orange); }
+    .step-circle svg { stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .step h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .step p { font-size: 0.85rem; color: var(--dim); font-weight: 300; max-width: 220px; margin: 0 auto; line-height: 1.6; }
 
-    .who h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 2.5rem;
-    }
-
+    /* WHO */
     .who-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin-top: 2.5rem;
     }
-
     .who-card {
-      background: var(--dark-card);
-      border: 1px solid var(--dark-border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      transition: border-color 0.3s, transform 0.3s;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.75rem;
+      transition: border-color 0.25s, transform 0.25s;
     }
-    .who-card:hover {
-      border-color: rgba(247,201,72,0.3);
-      transform: translateY(-2px);
-    }
+    .who-card:hover { border-color: rgba(247,201,72,0.25); transform: translateY(-2px); }
+    .who-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+    .who-card p { font-size: 0.85rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
 
-    .who-card h3 {
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--gold);
-    }
-    .who-card p {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-      font-weight: 300;
-      line-height: 1.55;
-    }
-
-    /* ═══════ COMPLIANCE ═══════ */
-    .compliance {
-      padding: 5rem 0;
-      border-top: 1px solid var(--dark-border);
-    }
-
+    /* COMPLIANCE */
     .compliance-box {
-      background: var(--dark-card);
-      border: 1px solid var(--dark-border);
-      border-radius: var(--radius);
-      padding: 3rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 2.5rem;
-      align-items: start;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 2.5rem;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 2rem; align-items: start;
     }
-
     .compliance-icon {
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: rgba(78,205,196,0.1);
-      border: 1px solid rgba(78,205,196,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(78,205,196,0.08); border: 1px solid rgba(78,205,196,0.2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .compliance-icon svg {
-      width: 26px; height: 26px;
-      stroke: #4ecdc4;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+    .compliance-icon svg { stroke: var(--teal); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .compliance-box h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.65rem; }
+    .compliance-box p { color: var(--dim); font-size: 0.9rem; font-weight: 300; line-height: 1.65; margin-bottom: 0.75rem; }
+    .check-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; margin-top: 1rem; }
+    .check-list li { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--mid); }
+    .check-list li svg { stroke: var(--teal); fill: none; stroke-width: 2; flex-shrink: 0; }
 
-    .compliance-box h3 {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 0.75rem;
-    }
 
-    .compliance-box p {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      font-weight: 300;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    .compliance-box p:last-child { margin-bottom: 0; }
 
-    .check-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.6rem 2rem;
-      margin-top: 1rem;
+    /* CTA */
+    .cta-section {
+      text-align: center; padding: 7rem 0;
+      border-top: 1px solid var(--border); position: relative;
     }
-
-    .check-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.88rem;
-      color: var(--text-mid);
-      font-weight: 400;
-    }
-    .check-list li svg {
-      width: 16px; height: 16px;
-      stroke: #4ecdc4;
-      fill: none;
-      stroke-width: 2;
-      flex-shrink: 0;
-    }
-
-    /* ═══════ CTA ═══════ */
-    .cta {
-      padding: 6rem 0 7rem;
-      text-align: center;
-      border-top: 1px solid var(--dark-border);
-      position: relative;
-    }
-
-    .cta::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 700px; height: 500px;
+    .cta-section::before {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 400px;
       background: radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%);
       pointer-events: none;
     }
-
-    .cta h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 1;
+    .cta-section h2 {
+      font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 0.75rem; position: relative; z-index: 1;
     }
-
-    .cta-sub {
-      color: var(--text-mid);
-      font-size: 1.05rem;
-      font-weight: 300;
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
+    .cta-section .section-sub { margin: 0 auto 2rem; }
     .cta-form {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
+      display: flex; gap: 10px; justify-content: center;
+      position: relative; z-index: 1;
     }
+    .cta-form input {
+      font-family: var(--sans); font-size: 0.95rem;
+      padding: 0.85rem 1.4rem; border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--card); color: var(--text);
+      width: 280px; outline: none;
+      transition: border-color 0.25s;
+    }
+    .cta-form input:focus { border-color: var(--orange); }
+    .cta-form input::placeholder { color: var(--dim); }
+    .cta-success {
+      display: none; align-items: center; gap: 8px;
+      color: var(--teal); font-size: 0.95rem; font-weight: 500;
+      margin-top: 1rem; justify-content: center;
+    }
+    .cta-success.show { display: flex; }
 
-    .cta-form input[type="email"] {
-      font-family: var(--sans);
-      font-size: 0.95rem;
-      padding: 0.85rem 1.4rem;
-      border-radius: 100px;
-      border: 1px solid var(--dark-border);
-      background: var(--dark-card);
-      color: var(--text);
-      width: 300px;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    .cta-form input[type="email"]:focus {
-      border-color: var(--orange);
-    }
-    .cta-form input[type="email"]::placeholder {
-      color: var(--text-dim);
-    }
-
-    /* ═══════ FOOTER ═══════ */
+    /* FOOTER */
     footer {
-      border-top: 1px solid var(--dark-border);
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      padding: 2rem; text-align: center;
+      color: var(--dim); font-size: 0.78rem;
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+      flex-wrap: wrap;
     }
+    footer a { color: var(--dim); transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
 
-    /* ═══════ SUCCESS MESSAGE ═══════ */
-    .form-success {
-      display: none;
-      align-items: center;
-      gap: 0.5rem;
-      color: #4ecdc4;
-      font-size: 0.95rem;
-      font-weight: 500;
-      margin-top: 1rem;
-      justify-content: center;
-    }
-    .form-success.show { display: flex; }
-    .form-success svg {
-      width: 18px; height: 18px;
-      stroke: #4ecdc4;
-      fill: none;
-      stroke-width: 2;
-    }
-
-    /* ═══════ ANIMATIONS ═══════ */
-    @keyframes fadeInDown {
+    /* ANIMATIONS */
+    @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ═══════ RESPONSIVE ═══════ */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .brief-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr; gap: 2.5rem; }
+      .brief-grid, .who-grid, .steps { grid-template-columns: 1fr; }
       .steps::before { display: none; }
-      .who-grid { grid-template-columns: 1fr; }
       .compliance-box { grid-template-columns: 1fr; }
       .check-list { grid-template-columns: 1fr; }
-      .hero-form,
-      .cta-form { flex-direction: column; align-items: center; }
-      .hero-form input[type="email"],
-      .cta-form input[type="email"] { width: 100%; max-width: 360px; }
-      .btn-primary { width: 100%; max-width: 360px; }
+      .hero-form, .cta-form { flex-direction: column; align-items: center; }
+      .hero-form input, .cta-form input { width: 100%; max-width: 320px; }
+      .btn-primary { width: 100%; max-width: 320px; }
+      .stats-inner { gap: 2rem; }
       nav { padding: 0.85rem 1.25rem; }
+      .nav-links { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══ NAV ═══ -->
-  <nav>
-    <a href="/" class="logo"><span class="logo-dot"></span> feedmatch.ai</a>
-    <a href="#waitlist" class="nav-cta">Join Waitlist</a>
-  </nav>
-
-  <!-- ═══ HERO ═══ -->
-  <section class="hero" id="top">
-    <div class="hero-badge">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg>
-      Early Access — Limited Spots
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-mark">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0a0a0f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
     </div>
-    <h1>Stop scrolling LinkedIn.<br/>Get an <em>Engagement Brief</em></h1>
-    <p class="hero-sub">
-      AI maps the trending topics, key people, and must-read articles in your niche, 
-      so you know exactly where to show up and what to say.
-    </p>
-    <form class="hero-form" action="https://formspree.io/f/mlgwvnok" method="POST" id="heroForm">
-      <input type="email" name="email" placeholder="you@company.com" required />
-      <button type="submit" class="btn-primary">Join Waitlist</button>
+    feedmatch<span>.ai</span>
+  </a>
+  <div class="nav-links">
+    <a href="manifesto.html" class="nav-link">Manifesto</a>
+    <a href="#access" class="nav-btn">Get access</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-eyebrow">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Early access open
+  </div>
+  <h1>Think before<br/>you <em>post.</em></h1>
+  <p class="hero-sub">Feedmatch prepares you for the LinkedIn conversation. Know what to say before you open the app.</p>
+  <form class="hero-form" id="heroForm">
+    <input type="email" name="email" placeholder="your@email.com" required/>
+    <button type="submit" class="btn-primary">Get instant access</button>
+  </form>
+  <p class="hero-note">No credit card. No LinkedIn login. Enter email and you're in immediately.</p>
+  <div class="hero-success" id="heroSuccess">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    Taking you to the app...
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-num">40-50%</div>
+        <div class="stat-label">profile growth in 7 days of testing</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10 min</div>
+        <div class="stat-label">to prepare vs 30 min scrolling</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">LinkedIn credentials needed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">your voice, your words</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section>
+  <div class="wrap reveal">
+    <div class="section-tag">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      The problem
+    </div>
+    <h2 class="section-title">You can tell when a comment<br/>was written by ChatGPT.</h2>
+    <p class="section-sub">So can the people you're trying to impress. LinkedIn is filling up with voices without thoughts. The professionals who stand out are the ones who still say something real.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+        </div>
+        <h3>"Great point! Fully agree, this is so important."</h3>
+        <p>Generic GPT-generated comments have become the new spam. They signal nothing about you, and people scroll past them instantly.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44L2.5 7a2.5 2.5 0 0 1 2.49-2H9.5zM14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44L21.5 7a2.5 2.5 0 0 0-2.49-2H14.5z"/></svg>
+        </div>
+        <h3>Presence for the sake of presence</h3>
+        <p>Posting every day because you feel like you should. Commenting 20 times because a coach told you to. Activity metrics mistaken for strategy.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>30 minutes of scrolling, zero strategy</h3>
+        <p>You open LinkedIn with no plan. You scroll until something catches your eye. Then you try to think of something smart to say. That's backwards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIMENT -->
+<section style="border-top: 1px solid var(--border);">
+  <div class="wrap reveal">
+    <div class="section-tag">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      The 7-day experiment
+    </div>
+    <h2 class="section-title">I tested this on myself first.</h2>
+    <p class="section-sub">7 days of intentional LinkedIn presence instead of random scrolling. Same frequency. Completely different approach.</p>
+    <div class="experiment-card">
+      <div class="experiment-label">Results: Week 1</div>
+      <div class="experiment-quote">"I didn't post more. I posted with precision. That's the difference."</div>
+      <div class="experiment-results">
+        <div class="exp-stat">
+          <div class="exp-num">40-50%</div>
+          <div class="exp-label">profile and post impressions growth</div>
+        </div>
+        <div class="exp-stat">
+          <div class="exp-num">5-10</div>
+          <div class="exp-label">early access requests, no ads</div>
+        </div>
+        <div class="exp-stat">
+          <div class="exp-num">0</div>
+          <div class="exp-label">GPT-generated comments used</div>
+        </div>
+      </div>
+      <div class="experiment-author">
+        <div class="author-dot"></div>
+        Olena, Senior Brand Designer and builder of Feedmatch
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section>
+  <div class="wrap reveal">
+    <div class="section-tag">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      What it is
+    </div>
+    <h2 class="section-title">A preparation space.<br/>Not a content generator.</h2>
+    <p class="section-sub">Feedmatch maps what your niche is discussing right now across four dimensions. You arrive prepared. You speak for yourself.</p>
+    <div class="brief-grid">
+      <div class="brief-card" data-c="or">
+        <div class="brief-num">01</div>
+        <h3>Trending Topics</h3>
+        <p>What your niche is debating right now. Find where you have a genuine perspective before you open the feed.</p>
+        <span class="brief-tag">Know what to talk about</span>
+      </div>
+      <div class="brief-card" data-c="gd">
+        <div class="brief-num">02</div>
+        <h3>Key People</h3>
+        <p>Who is driving the conversation. Engage only if you have something real to add to what they're saying.</p>
+        <span class="brief-tag">Know who to engage with</span>
+      </div>
+      <div class="brief-card" data-c="tl">
+        <div class="brief-num">03</div>
+        <h3>Articles &amp; Newsletters</h3>
+        <p>Long-form content worth reading before you comment. Your reaction to the actual piece, not its headline.</p>
+        <span class="brief-tag">Know what to reference</span>
+      </div>
+      <div class="brief-card" data-c="vt">
+        <div class="brief-num">04</div>
+        <h3>Cross-Platform Voices</h3>
+        <p>Insights from X, podcasts, and blogs that haven't hit LinkedIn yet. Be the one who brings something new.</p>
+        <span class="brief-tag">Know what others don't</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section>
+  <div class="wrap reveal">
+    <div class="section-tag">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      How it works
+    </div>
+    <h2 class="section-title">Prepare. Think. Show up.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-circle">
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Enter your niche</h3>
+        <p>Tell Feedmatch your area of expertise. Be specific.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">
+          <svg width="22" height="22" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <h3>Get your brief</h3>
+        <p>AI scans the web for what your niche is actually discussing right now. 4 sections, real topics, ready in under a minute.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Speak for yourself</h3>
+        <p>Go to LinkedIn knowing exactly what you want to say. No templates. Your voice. Your words.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section>
+  <div class="wrap reveal">
+    <div class="section-tag">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Built for
+    </div>
+    <h2 class="section-title">People who want to be heard,<br/>not just seen.</h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3>Freelancers &amp; Consultants</h3>
+        <p>Turn thoughtful comments into discovery calls. Show up consistently where your ideal clients are already talking. Say something worth remembering.</p>
+      </div>
+      <div class="who-card">
+        <h3>Founders &amp; Builders</h3>
+        <p>Build real authority while you build your product. Position yourself with a genuine point of view, not a content calendar.</p>
+      </div>
+      <div class="who-card">
+        <h3>Sales Professionals</h3>
+        <p>Warm up prospects through meaningful engagement. Know what's on their minds before you send the first message.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="access">
+  <div class="wrap">
+    <h2>Your niche is talking.<br/>Go in prepared.</h2>
+    <p class="section-sub" style="margin: 0.75rem auto 1.75rem;">Enter your email and get instant access. No waiting list. No credit card.</p>
+    <form class="cta-form" id="ctaForm">
+      <input type="email" name="email" placeholder="your@email.com" required/>
+      <button type="submit" class="btn-primary">Get instant access</button>
     </form>
-    <p class="hero-note">Free during beta. No LinkedIn credentials needed.</p>
-    <div class="form-success" id="heroSuccess">
-      <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-      You're on the list! We'll be in touch soon.
+    <div class="cta-success" id="ctaSuccess">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Taking you to the app...
     </div>
-  </section>
-
-  <!-- ═══ PROBLEM ═══ -->
-  <section class="problem">
-    <div class="container reveal">
-      <div class="section-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-        The Problem
-      </div>
-      <h2>LinkedIn engagement shouldn't feel like guesswork</h2>
-      <p class="problem-text">
-        You know commenting on the right posts drives leads and visibility. 
-        But finding those posts? That's a daily time sink with no system behind it.
-      </p>
-      <div class="pain-grid">
-        <div class="pain-card">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          </div>
-          <h3>LinkedIn's feed is a black box</h3>
-          <p>The algorithm shows you random content. Posts from your target audience get buried under viral fluff.</p>
-        </div>
-        <div class="pain-card">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3>30+ minutes wasted daily</h3>
-          <p>Scrolling, searching, context-switching. You're spending more time hunting for posts than actually engaging.</p>
-        </div>
-        <div class="pain-card">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <h3>Generic comments get ignored</h3>
-          <p>Without context on trending topics and who's driving the conversation, your comments blend into the noise.</p>
-        </div>
-      </div>
+    <div style="display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap;">
+      <span style="font-size:0.75rem;color:var(--dim);display:flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>No LinkedIn login</span>
+      <span style="font-size:0.75rem;color:var(--dim);display:flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>No automation</span>
+      <span style="font-size:0.75rem;color:var(--dim);display:flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>LinkedIn ToS compliant</span>
+      <span style="font-size:0.75rem;color:var(--dim);display:flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>You write every word</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ HOW IT WORKS — BRIEF ═══ -->
-  <section class="brief" id="how">
-    <div class="container reveal">
-      <div class="section-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Your Engagement Brief
-      </div>
-      <h2>4 sections. One clear picture.</h2>
-      <p class="brief-sub">
-        Every brief maps your LinkedIn landscape across four dimensions — 
-        so you engage with purpose, not guesswork.
-      </p>
-      <div class="brief-grid">
-        <!-- 1 -->
-        <div class="brief-card" data-color="orange">
-          <div class="brief-num">01</div>
-          <h3>Trending Topics</h3>
-          <p>Real-time pulse of what your niche is discussing right now. Hot debates, emerging ideas, breaking news — ranked by relevance to your expertise.</p>
-          <span class="brief-tag">Know what to talk about</span>
-        </div>
-        <!-- 2 -->
-        <div class="brief-card" data-color="gold">
-          <div class="brief-num">02</div>
-          <h3>Key People</h3>
-          <p>Influential voices in your space who are actively posting. Direct LinkedIn profile links and suggested search queries so you can find their latest content instantly.</p>
-          <span class="brief-tag">Know who to engage with</span>
-        </div>
-        <!-- 3 -->
-        <div class="brief-card" data-color="teal">
-          <div class="brief-num">03</div>
-          <h3>Articles &amp; Newsletters</h3>
-          <p>Must-read industry content being shared and discussed on LinkedIn. With ready-made comment angles — share your take, not just a "great read!"</p>
-          <span class="brief-tag">Know what to reference</span>
-        </div>
-        <!-- 4 -->
-        <div class="brief-card" data-color="violet">
-          <div class="brief-num">04</div>
-          <h3>Cross-Platform Voices</h3>
-          <p>Insights from X/Twitter, podcasts, and blogs that haven't hit LinkedIn yet. Be the one who brings fresh perspectives to the conversation first.</p>
-          <span class="brief-tag">Know what others don't</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<footer>
+  <span>2025 Feedmatch.ai</span>
+  <a href="manifesto.html">Manifesto</a>
+  <a href="app.html">App</a>
+  <span style="color: #3a3a4a">preparation tool, not a bot</span>
+</footer>
 
-  <!-- ═══ WORKFLOW ═══ -->
-  <section class="workflow">
-    <div class="container reveal">
-      <div class="section-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        How It Works
-      </div>
-      <h2>From brief to engagement in 5 minutes</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-circle">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          </div>
-          <h3>Describe your niche</h3>
-          <p>Tell us your industry, expertise, and the types of people you want to connect with.</p>
-        </div>
-        <div class="step">
-          <div class="step-circle">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <h3>Get your brief</h3>
-          <p>AI scans the web for trends, people, and content in your space — delivered as a structured engagement brief.</p>
-        </div>
-        <div class="step">
-          <div class="step-circle">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <h3>Engage on LinkedIn</h3>
-          <p>Click through to LinkedIn profiles, use search links, and post comments drafted in your voice. Always manual, always authentic.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  <!-- ═══ WHO ═══ -->
-  <section class="who">
-    <div class="container reveal">
-      <div class="section-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Built For
-      </div>
-      <h2>Who this is for</h2>
-      <div class="who-grid">
-        <div class="who-card">
-          <h3>Freelancers &amp; Consultants</h3>
-          <p>Turn LinkedIn comments into discovery calls. Show up consistently where your ideal clients are already talking.</p>
-        </div>
-        <div class="who-card">
-          <h3>Founders &amp; Builders</h3>
-          <p>Build authority while you build your product. Position yourself as a thought leader in your space without spending hours on content strategy.</p>
-        </div>
-        <div class="who-card">
-          <h3>Sales Professionals</h3>
-          <p>Warm up prospects through smart engagement before the outreach. Social selling, systematized.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  // Email gate handler
+  async function handleEmailGate(email) {
+    // Store locally
+    localStorage.setItem('feedmatch_email', email);
+    // Submit to Formspree (fire and forget)
+    fetch('https://formspree.io/f/mlgwvnok', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email })
+    }).catch(() => {});
+    // Redirect
+    setTimeout(() => { window.location.href = 'app.html'; }, 800);
+  }
 
-  <!-- ═══ COMPLIANCE ═══ -->
-  <section class="compliance">
-    <div class="container reveal">
-      <div class="compliance-box">
-        <div class="compliance-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div>
-          <h3>A navigation system, not a bot</h3>
-          <p>
-            Feedmatch is fundamentally different from automation tools. We never access your LinkedIn account, 
-            never auto-post, and never scrape the platform. Instead, we scan the open web for trends and people 
-            in your niche, then give you the map. You drive.
-          </p>
-          <ul class="check-list">
-            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No LinkedIn login required</li>
-            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No automated posting</li>
-            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No scraping or data extraction</li>
-            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% manual engagement</li>
-            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>LinkedIn ToS compliant</li>
-            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>You decide what to post</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  // Hero form
+  document.getElementById('heroForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Opening app...'; btn.disabled = true;
+    document.getElementById('heroSuccess').classList.add('show');
+    await handleEmailGate(email);
+  });
 
-  <!-- ═══ CTA ═══ -->
-  <section class="cta" id="waitlist">
-    <div class="container reveal">
-      <h2>Your niche is talking.<br/>Know exactly where to show up.</h2>
-      <p class="cta-sub">Join the waitlist to get early access to your first Engagement Brief.</p>
-      <form class="cta-form" action="https://formspree.io/f/mlgwvnok" method="POST" id="ctaForm">
-        <input type="email" name="email" placeholder="you@company.com" required />
-        <button type="submit" class="btn-primary">Join Waitlist</button>
-      </form>
-      <div class="form-success" id="ctaSuccess">
-        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-        You're on the list! We'll be in touch soon.
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ FOOTER ═══ -->
-  <footer>
-    <div class="container">
-      &copy; 2026 Feedmatch.ai. All rights reserved.
-    </div>
-  </footer>
-
-  <!-- ═══ SCRIPTS ═══ -->
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Form handling
-    function handleForm(formId, successId) {
-      const form = document.getElementById(formId);
-      const success = document.getElementById(successId);
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = form.querySelector('button[type="submit"]');
-        const originalText = btn.textContent;
-        btn.textContent = 'Sending...';
-        btn.disabled = true;
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-          });
-          if (res.ok) {
-            form.style.display = 'none';
-            success.classList.add('show');
-          } else {
-            btn.textContent = 'Try again';
-            btn.disabled = false;
-          }
-        } catch {
-          btn.textContent = 'Try again';
-          btn.disabled = false;
-        }
-      });
-    }
-    handleForm('heroForm', 'heroSuccess');
-    handleForm('ctaForm', 'ctaSuccess');
-  </script>
+  // CTA form
+  document.getElementById('ctaForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Opening app...'; btn.disabled = true;
+    document.getElementById('ctaSuccess').classList.add('show');
+    await handleEmailGate(email);
+  });
+</script>
 </body>
 </html>
